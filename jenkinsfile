@@ -1,0 +1,38 @@
+pipeline {
+    agent any
+
+    tools {
+        // Enforce the use of Maven installed in your Jenkins tools configuration
+        maven 'Maven 3.9.16'
+        jdk 'Java 22'
+    }
+
+    environment {
+        // Securely inject credentials into the build agent runtime
+        BROWSERSTACK_USERNAME   = credentials('BROWSERSTACK_USERNAME')
+        BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
+    }
+
+    stages {
+        stage('Checkout Code') {
+            steps {
+
+                checkout scm
+            }
+        }
+
+        stage('Execute BrowserStack Tests') {
+            steps {
+
+                sh 'mvn clean test -DsuiteXmlFile=testng.xml'
+            }
+        }
+    }
+
+    post {
+        always {
+
+            junit '**/target/surefire-reports/*.xml'
+        }
+    }
+}

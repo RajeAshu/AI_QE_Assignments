@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    tools {
-
-        maven 'Maven 3.9.16'
-        jdk 'Java 22'
-    }
-
     environment {
         BROWSERSTACK_USERNAME   = credentials('BROWSERSTACK_USERNAME')
         BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
@@ -21,7 +15,7 @@ pipeline {
 
         stage('Execute BrowserStack Tests') {
             steps {
-
+                // Uses your system's global environment variables to invoke Maven directly
                 bat 'mvn clean test -DsuiteXmlFile=testng.xml'
             }
         }

@@ -15,8 +15,8 @@ pipeline {
 
         stage('Execute BrowserStack Tests') {
             steps {
-                // Uses your system's global environment variables to invoke Maven directly
-                bat 'mvn clean test -DsuiteXmlFile=testng.xml'
+
+                bat 'mvnw.cmd clean test -DsuiteXmlFile=testng.xml'
             }
         }
     }

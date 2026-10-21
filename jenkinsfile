@@ -16,7 +16,7 @@ pipeline {
         stage('Execute BrowserStack Tests') {
             steps {
 
-                bat 'mvnw.cmd clean test -DsuiteXmlFile=testng.xml'
+                bat '"C:\\Program Files\\apache-maven-3.9.16\\bin\\mvn.cmd" clean test -DsuiteXmlFile=testng.xml'
             }
         }
     }

@@ -8,7 +8,6 @@ pipeline {
     }
 
     environment {
-
         BROWSERSTACK_USERNAME   = credentials('BROWSERSTACK_USERNAME')
         BROWSERSTACK_ACCESS_KEY = credentials('BROWSERSTACK_ACCESS_KEY')
     }
@@ -16,7 +15,6 @@ pipeline {
     stages {
         stage('Checkout Code') {
             steps {
-
                 checkout scm
             }
         }
@@ -31,7 +29,6 @@ pipeline {
 
     post {
         always {
-
             junit '**/target/surefire-reports/*.xml'
         }
     }
